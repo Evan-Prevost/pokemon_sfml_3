@@ -63,7 +63,7 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="menu.txt">
+    <Text Include="test.txt">
       <Filter>Fichiers sources</Filter>
     </Text>
   </ItemGroup>

@@ -1,0 +1,26 @@
+play / credit / settting / quit
+
+    void handKeys(void);
+
+    void GameWindow::handKeys(void)
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        {
+            printf("UP");
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+        {
+            printf("DOWN");
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            printf("LEFT");
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            printf("RIGHT");
+        }
+    }
+
+
+    this->_transformable.setPosition(30.f, 30.f);

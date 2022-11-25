@@ -14,8 +14,6 @@ public:
     //
     bool isOpen(void) const;
     void handleEvents(void);
-    void handKeys(void);
-    void update();
     void clear(void);
     void display(void);
 

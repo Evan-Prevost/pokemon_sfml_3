@@ -26,31 +26,6 @@ void GameWindow::handleEvents(void)
     }
 }
 
-void GameWindow::handKeys(void)
-{
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-    {
-        printf("UP");
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-    {
-        printf("DOWN");
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-    {
-        printf("LEFT");
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-    {
-        printf("RIGHT");
-    }
-}
-
-void GameWindow::update(void)
-{
-    // deplacement personnage
-}
-
 void GameWindow::clear(void)
 {
     this->_window.clear();
