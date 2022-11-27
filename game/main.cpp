@@ -4,6 +4,7 @@
 #include "MainCharacter.h"
 #include "AnimatedMainCharacter.h"
 #include "ConfigMainCharacter.h"
+#include "ConfigMap.h"
 #include "GameWindow.h"
 #include "Entity.h"
 #include "TileMap.h"
@@ -18,11 +19,38 @@ int main()
         // error...
     }
 
-    // on crée la tilemap avec le niveau précédemment défini
-    TileMap map, map2;
-    if (!map.load("data/assets/tileMap/tileSetTest.png", sf::Vector2u(32, 32), level, 16, 8))
+    // on crée la tilemap
+    TileMap Ocean, Island, Trees_1, Trees_2, Trees_3, Plateau, Flower_grass, Bushes, Fence, House_trees, House, Dock/*, Collisions*//*, Battle_zones*/, Foreground_objects;
+
+    if (!Ocean.load(TILE_MAP_PATH, sf::Vector2u(12, 12), ocean, 70, 40))
         return -1;
-    if (!map2.load("data/assets/tileMap/tileSetTest.png", sf::Vector2u(32, 32), level2, 16, 8))
+    if (!Island.load(TILE_MAP_PATH, sf::Vector2u(12, 12), island, 70, 40))
+        return -1;
+    if (!Trees_1.load(TILE_MAP_PATH, sf::Vector2u(12, 12), trees_1, 70, 40))
+        return -1;
+    if (!Trees_2.load(TILE_MAP_PATH, sf::Vector2u(12, 12), trees_2, 70, 40))
+        return -1;
+    if (!Trees_3.load(TILE_MAP_PATH, sf::Vector2u(12, 12), trees_3, 70, 40))
+        return -1;
+    if (!Plateau.load(TILE_MAP_PATH, sf::Vector2u(12, 12), plateau, 70, 40))
+        return -1;
+    if (!Flower_grass.load(TILE_MAP_PATH, sf::Vector2u(12, 12), flower_grass, 70, 40))
+        return -1;
+    if (!Bushes.load(TILE_MAP_PATH, sf::Vector2u(12, 12), bushes, 70, 40))
+        return -1;
+    if (!Fence.load(TILE_MAP_PATH, sf::Vector2u(12, 12), fence, 70, 40))
+        return -1;
+    if (!House_trees.load(TILE_MAP_PATH, sf::Vector2u(12, 12), house_trees, 70, 40))
+        return -1;
+    if (!House.load(TILE_MAP_PATH, sf::Vector2u(12, 12), house, 70, 40))
+        return -1;
+    if (!Dock.load(TILE_MAP_PATH, sf::Vector2u(12, 12), dock, 70, 40))
+        return -1;
+    //if (!Collisions.load(COLLISION_MAP_PATH, sf::Vector2u(12, 12), collisions, 70, 40))
+    //    return -1;
+    //if (!Battle_zones.load(TILE_MAP_PATH, sf::Vector2u(12, 12), battle_zones, 70, 40))
+    //    return -1;
+    if (!Foreground_objects.load(TILE_MAP_PATH, sf::Vector2u(12, 12), foreground_objects, 70, 40))
         return -1;
 
     sf::Texture pauseTexture;
@@ -32,7 +60,9 @@ int main()
     Entity pause = Entity(pauseTexture);
 
     MainCharacter mainCharacter = MainCharacter(texture);
-    mainCharacter.setPosition(30.f, 30.f);
+
+    // init main character position
+    mainCharacter.setPosition(300.f, 210.f);
 
     int countFrame = 0;
     while (window.isOpen())

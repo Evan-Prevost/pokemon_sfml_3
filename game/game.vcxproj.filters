@@ -56,6 +56,9 @@
     <ClInclude Include="MapArray.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="ConfigMap.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\Downloads\ACharUp.png">

@@ -7,7 +7,7 @@ GameWindow::GameWindow() : _window(sf::VideoMode::getDesktopMode(), "Pokemon Lik
 
     this->_window.setVerticalSyncEnabled(true);
 
-    this->_view.reset(sf::FloatRect(0.f, 0.f, 240.f, 135.f));
+    this->_view.reset(sf::FloatRect(150.f, 120.f, 320.f, 180.f));
 
     this->_window.setView(_view);
 }
