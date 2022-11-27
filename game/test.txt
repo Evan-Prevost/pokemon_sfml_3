@@ -1,23 +1,11 @@
 play / credit / settting / quit
 
-    void handKeys(void);
+objectifs :
 
-    void GameWindow::handKeys(void)
-    {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        {
-            printf("UP");
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        {
-            printf("DOWN");
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            printf("LEFT");
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        {
-            printf("RIGHT");
-        }
-    }
+- collision
+- déplacement perso (pas de diago)
+- animations
+- déplacement caméra
+- menu
+- music
+- carte

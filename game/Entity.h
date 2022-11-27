@@ -15,6 +15,7 @@ public:
     sf::Sprite& getSprite(void);
     const sf::Sprite& getSprite(void) const;
 
+    void handKeys(void);
     //
     void setPosition(float x, float y);
 };

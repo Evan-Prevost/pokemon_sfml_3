@@ -63,7 +63,9 @@ int main()
     {
         window.clear();
         window.handleEvents();
-        //window.handKeys();
+
+        mainCharacter.handKeys();
+
         if (countFrame % 15 == 0)
         {
             mainCharacter.nextAnimation();
