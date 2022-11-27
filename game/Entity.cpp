@@ -13,3 +13,8 @@ const sf::Sprite& Entity::getSprite(void) const
 {
     return this->_sprite;
 }
+
+void Entity::setPosition(float x, float y)
+{
+    this->_sprite.setPosition(x, y);
+}

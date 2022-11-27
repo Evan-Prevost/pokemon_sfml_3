@@ -40,3 +40,8 @@ void GameWindow::drawEntity(const Entity& entity)
 {
     this->_window.draw(entity.getSprite());
 }
+
+void GameWindow::drawMap(const TileMap& tilemap)
+{
+    this->_window.draw(tilemap);
+}

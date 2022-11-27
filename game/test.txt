@@ -21,6 +21,3 @@ play / credit / settting / quit
             printf("RIGHT");
         }
     }
-
-
-    this->_transformable.setPosition(30.f, 30.f);

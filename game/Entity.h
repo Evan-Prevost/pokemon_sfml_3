@@ -14,4 +14,7 @@ public:
     //
     sf::Sprite& getSprite(void);
     const sf::Sprite& getSprite(void) const;
+
+    //
+    void setPosition(float x, float y);
 };

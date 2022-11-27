@@ -2,6 +2,8 @@
 
 #include <SFML/Window.hpp>
 #include "Entity.h"
+#include "MapArray.h"
+#include "TileMap.h"
 
 class GameWindow
 {
@@ -16,7 +18,8 @@ public:
     void handleEvents(void);
     void clear(void);
     void display(void);
-
+    
     //
     void drawEntity(const Entity&);
+    void drawMap(const TileMap&);
 };

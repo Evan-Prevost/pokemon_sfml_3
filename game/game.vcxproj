@@ -138,6 +138,7 @@
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainCharacter.cpp" />
+    <ClCompile Include="MapArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedMainCharacter.h" />
@@ -145,6 +146,8 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="MainCharacter.h" />
+    <ClInclude Include="MapArray.h" />
+    <ClInclude Include="TileMap.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\Downloads\ACgarRight.png" />
