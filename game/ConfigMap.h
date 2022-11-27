@@ -1,3 +1,3 @@
 #pragma once
 
-#define MAP_PATH "data/assets/tileMap/map.png"
+#define MAP_PATH "data/assets/tileMap/tileSet.png"
