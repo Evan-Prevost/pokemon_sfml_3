@@ -56,7 +56,7 @@ int main()
     MainCharacter mainCharacter = MainCharacter(texture);
 
     // init main character position
-    mainCharacter.setPosition(120.f, 60.f);
+    mainCharacter.setPosition(300.f, 210.f);
 
     int countFrame = 0;
     while (window.isOpen())
