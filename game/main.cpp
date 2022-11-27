@@ -25,23 +25,35 @@ int main()
     if (!map2.load("data/assets/tileMap/tileSetTest.png", sf::Vector2u(32, 32), level2, 16, 8))
         return -1;
 
+    sf::Texture pauseTexture;
+    if (!pauseTexture.loadFromFile("data/assets/pause.png"))
+        return -1;
+
+    Entity pause = Entity(pauseTexture);
+
     MainCharacter mainCharacter = MainCharacter(texture);
     mainCharacter.setPosition(30.f, 30.f);
 
     int countFrame = 0;
     while (window.isOpen())
     {
-        window.clear();
-        window.handleEvents();
-        //window.handKeys();
-        if (countFrame % 15 == 0)
-        {
-            mainCharacter.nextAnimation();
-            countFrame = 0;
+        if (window.isPause()) {
+            window.handleEventsPause();
+            window.drawEntity(pause);
         }
-        countFrame++;
-        window.drawMap(map);
-        window.drawEntity(mainCharacter);
+        else {
+            window.clear();
+            window.handleEventsGame();
+            //window.handKeys();
+            if (countFrame % 15 == 0)
+            {
+                mainCharacter.nextAnimation();
+                countFrame = 0;
+            }
+            countFrame++;
+            window.drawMap(map);
+            window.drawEntity(mainCharacter);
+        }
         window.display();
 
     }

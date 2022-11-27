@@ -10,16 +10,19 @@ class GameWindow
 private:
     sf::RenderWindow _window;
     sf::View _view;
+    bool _pause = false;
 
 public:
     GameWindow(void);
     //
     bool isOpen(void) const;
-    void handleEvents(void);
+    void handleEventsGame(void);
+    void handleEventsPause(void);
     void clear(void);
     void display(void);
     
     //
     void drawEntity(const Entity&);
     void drawMap(const TileMap&);
+    bool isPause(void);
 };
