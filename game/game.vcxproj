@@ -146,6 +146,7 @@
     <ClInclude Include="ConfigMap.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameWindow.h" />
+    <ClInclude Include="Pause.h" />
     <ClInclude Include="MainCharacter.h" />
     <ClInclude Include="MapArray.h" />
     <ClInclude Include="TileMap.h" />

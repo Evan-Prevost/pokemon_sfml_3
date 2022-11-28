@@ -1,5 +1,6 @@
 #include "GameWindow.h"
 #include <iostream>
+#include "ConfigMap.h"
 
 GameWindow::GameWindow() : _window(sf::VideoMode::getDesktopMode(), "Pokemon Like", sf::Style::None)
 {
@@ -7,7 +8,7 @@ GameWindow::GameWindow() : _window(sf::VideoMode::getDesktopMode(), "Pokemon Lik
 
     this->_window.setVerticalSyncEnabled(true);
 
-    this->_view.reset(sf::FloatRect(150.f, 120.f, 320.f, 180.f));
+    this->_view.reset(INITIAL_VIEW_RECT);
 
     this->_window.setView(_view);
 }
@@ -37,26 +38,42 @@ void GameWindow::handleEventsPause(void)
     sf::Event event;
     while (this->_window.pollEvent(event))
     {
-        if (event.type == sf::Event::Closed)
+        if (event.type == sf::Event::Closed) {
             this->_window.close();
+        }
+        else if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(this->_window);
 
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            sf::Vector2i position = sf::Mouse::getPosition(this->_window);
-            position.x = position.x / 8;
-            position.y = position.y / 8;
+            int ratio = this->_window.getSize().x / this->_view.getSize().x;
 
-            if (position.y >= 55 && position.y <= 74) {
-                if (position.x >= 24 && position.x <= 72) {
-                    this->_pause = false;
+            /*
+            std::cout << mousePosition.x;
+            std::cout << " ";
+            std::cout << mousePosition.y;
+            std::cout << " ";
+            std::cout << ratio;
+            std::cout << " ";
+            std::cout << mousePosition.x/ratio;
+            std::cout << " ";
+            std::cout << mousePosition.y/ratio;
+            std::cout << std::endl;*/
+
+            if ( mousePosition.y >= 55*ratio   &&   mousePosition.y <= 74*ratio ) {
+                if ( mousePosition.x >= 132 * ratio   &&   mousePosition.y <= 179 * ratio ) {
+                    this->_window.close();
                     break;
                 }
+                else if ( mousePosition.x >= 24*ratio   &&   mousePosition.x <= 72*ratio ) {
+                    this->_pause = false;
+                    break;
+                }/*
                 else if (position.x >= 77 && position.y <= 125) {
                     //
                 }
                 else if (position.x >= 132 && position.y <= 179) {
                     this->_window.close();
                     break;
-                }
+                }*/
             }
         }
     }

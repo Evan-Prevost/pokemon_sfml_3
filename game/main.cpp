@@ -9,6 +9,7 @@
 #include "Entity.h"
 #include "TileMap.h"
 
+
 int main()
 {
     GameWindow window;
@@ -24,6 +25,9 @@ int main()
         return -1;
 
     Entity pause = Entity(pauseTexture);
+    pause.setPosition(INITIAL_VIEW_RECT.left, INITIAL_VIEW_RECT.top);
+
+
 
     // on crée la tilemap
     TileMap Ocean, Island, Trees_1, Trees_2, Trees_3, Plateau, Flower_grass, Bushes, Fence, House_trees, House, Dock/*, Collisions*//*, Battle_zones*/, Foreground_objects;
