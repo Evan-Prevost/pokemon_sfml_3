@@ -19,6 +19,12 @@ int main()
         // error...
     }
 
+    sf::Texture pauseTexture;
+    if (!pauseTexture.loadFromFile("data/assets/pause.png"))
+        return -1;
+
+    Entity pause = Entity(pauseTexture);
+
     // on crée la tilemap
     TileMap Ocean, Island, Trees_1, Trees_2, Trees_3, Plateau, Flower_grass, Bushes, Fence, House_trees, House, Dock/*, Collisions*//*, Battle_zones*/, Foreground_objects;
 
@@ -53,12 +59,6 @@ int main()
     if (!Foreground_objects.load(TILE_MAP_PATH, sf::Vector2u(12, 12), foreground_objects, 70, 40))
         return -1;
 
-    sf::Texture pauseTexture;
-    if (!pauseTexture.loadFromFile("data/assets/pause.png"))
-        return -1;
-
-    Entity pause = Entity(pauseTexture);
-
     MainCharacter mainCharacter = MainCharacter(texture);
 
     // init main character position
@@ -73,7 +73,7 @@ int main()
         }
         else {
             window.clear();
-            window.handleEvents();
+            window.handleEventsGame();
 
             // movement main character
 

@@ -151,12 +151,6 @@
     <ClInclude Include="TileMap.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\..\Downloads\ACgarRight.png" />
-    <Image Include="..\..\..\..\..\Downloads\ACharDown.png" />
-    <Image Include="..\..\..\..\..\Downloads\ACharLeft.png" />
-    <Image Include="..\..\..\..\..\Downloads\ACharUp.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

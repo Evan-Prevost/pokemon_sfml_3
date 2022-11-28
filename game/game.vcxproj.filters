@@ -61,20 +61,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\..\Downloads\ACharUp.png">
-      <Filter>Fichiers de ressources</Filter>
-    </Image>
-    <Image Include="..\..\..\..\..\Downloads\ACharLeft.png">
-      <Filter>Fichiers de ressources</Filter>
-    </Image>
-    <Image Include="..\..\..\..\..\Downloads\ACharDown.png">
-      <Filter>Fichiers de ressources</Filter>
-    </Image>
-    <Image Include="..\..\..\..\..\Downloads\ACgarRight.png">
-      <Filter>Fichiers de ressources</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="test.txt">
       <Filter>Fichiers sources</Filter>
     </Text>
