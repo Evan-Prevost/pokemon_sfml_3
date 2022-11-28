@@ -78,35 +78,11 @@ int main()
         else {
             window.clear();
             window.handleEventsGame();
+            
+            // camera folow character
+            /*window._view(mainCharacter);*/
 
             // movement main character
-
-           /* if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-                mainCharacter.goLeft();
-            }
-            else {
-                mainCharacter.stopLeft();
-            }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-                mainCharacter.goRight();
-            }
-            else {
-                mainCharacter.stopRight();
-            }
-
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                mainCharacter.goUp();
-            }
-            else {
-                mainCharacter.stopUp();
-            }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-                mainCharacter.goDown();
-            }
-            else {
-                mainCharacter.stopDown();
-            }*/
-
             mainCharacter.handKeys();
 
             if (countFrame % 15 == 0)

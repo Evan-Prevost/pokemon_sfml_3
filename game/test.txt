@@ -3,7 +3,6 @@ play / credit / settting / quit
 objectifs :
 
 - collision
-- déplacement perso (pas de diago)
 - animations
 - déplacement caméra
 - menu
