@@ -8,4 +8,4 @@ objectifs :
 - déplacement caméra
 - menu
 - music
-- carte
+- mini-map
