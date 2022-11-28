@@ -53,6 +53,12 @@ int main()
     if (!Foreground_objects.load(TILE_MAP_PATH, sf::Vector2u(12, 12), foreground_objects, 70, 40))
         return -1;
 
+    sf::Texture pauseTexture;
+    if (!pauseTexture.loadFromFile("data/assets/pause.png"))
+        return -1;
+
+    Entity pause = Entity(pauseTexture);
+
     MainCharacter mainCharacter = MainCharacter(texture);
 
     // init main character position
@@ -61,74 +67,79 @@ int main()
     int countFrame = 0;
     while (window.isOpen())
     {
-        window.clear();
-        window.handleEvents();
-
-        // movement main character
-
-       /* if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            mainCharacter.goLeft();
+        if (window.isPause()) {
+            window.handleEventsPause();
+            window.drawEntity(pause);
         }
         else {
-            mainCharacter.stopLeft();
+            window.clear();
+            window.handleEvents();
+
+            // movement main character
+
+           /* if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+                mainCharacter.goLeft();
+            }
+            else {
+                mainCharacter.stopLeft();
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+                mainCharacter.goRight();
+            }
+            else {
+                mainCharacter.stopRight();
+            }
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+                mainCharacter.goUp();
+            }
+            else {
+                mainCharacter.stopUp();
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+                mainCharacter.goDown();
+            }
+            else {
+                mainCharacter.stopDown();
+            }*/
+
+            mainCharacter.handKeys();
+
+            if (countFrame % 15 == 0)
+            {
+                mainCharacter.nextAnimation();
+                countFrame = 0;
+            }
+            countFrame++;
+
+            // build map
+
+            // core
+            window.drawMap(Ocean);
+            window.drawMap(Island);
+            window.drawMap(Trees_1);
+            window.drawMap(Trees_2);
+            window.drawMap(Trees_3);
+            window.drawMap(Plateau);
+            window.drawMap(Flower_grass);
+
+            //// objects
+            window.drawMap(Bushes);
+            window.drawMap(Fence);
+            window.drawMap(House_trees);
+            window.drawMap(House);
+            window.drawMap(Dock);
+
+            // debuging
+            //window.drawMap(Collisions);
+            //window.drawMap(Battle_zones);
+
+            //// character
+            window.drawEntity(mainCharacter);
+
+            //// foreground objects
+            window.drawMap(Foreground_objects);
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            mainCharacter.goRight();
-        }
-        else {
-            mainCharacter.stopRight();
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-            mainCharacter.goUp();
-        }
-        else {
-            mainCharacter.stopUp();
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-            mainCharacter.goDown();
-        }
-        else {
-            mainCharacter.stopDown();
-        }*/
-
-        mainCharacter.handKeys();
-
-        if (countFrame % 15 == 0)
-        {
-            mainCharacter.nextAnimation();
-            countFrame = 0;
-        }
-        countFrame++;
-
-        // build map
-
-        // core
-        window.drawMap(Ocean);
-        window.drawMap(Island);
-        window.drawMap(Trees_1);
-        window.drawMap(Trees_2);
-        window.drawMap(Trees_3);
-        window.drawMap(Plateau);
-        window.drawMap(Flower_grass);
-
-        //// objects
-        window.drawMap(Bushes);
-        window.drawMap(Fence);
-        window.drawMap(House_trees);
-        window.drawMap(House);
-        window.drawMap(Dock);
-
-        // debuging
-        //window.drawMap(Collisions);
-        //window.drawMap(Battle_zones);
-
-        //// character
-        window.drawEntity(mainCharacter);
-
-        //// foreground objects
-        window.drawMap(Foreground_objects);
-
         // display window
         window.display();
 
