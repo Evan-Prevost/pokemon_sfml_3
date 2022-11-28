@@ -82,6 +82,7 @@ void GameWindow::drawMap(const TileMap& tilemap)
     this->_window.draw(tilemap);
 }
 
-bool GameWindow::isPause(void) {
+bool GameWindow::isPause(void) 
+{
     return this->_pause;
 }
