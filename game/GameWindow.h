@@ -17,12 +17,16 @@ public:
     GameWindow(void);
     //
     bool isOpen(void) const;
+
     int handleEventsMenu(void);
-    void handleEventsGame(void);
-    void handleEventsPause(void);
+    int handleEventsGame(void);
+    int handleEventsPause(void);
+
     void clear(void);
     void display(void);
+
     sf::Vector2f getSize(void);
+    //void setView();
     
     //
     void drawEntity(const Entity&);

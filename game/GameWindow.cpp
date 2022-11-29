@@ -8,7 +8,8 @@ GameWindow::GameWindow() : _window(sf::VideoMode::getDesktopMode(), "Pokemon Lik
 
     this->_window.setVerticalSyncEnabled(true);
 
-    this->_view.reset(INITIAL_VIEW_RECT);
+    this->_view.setCenter(320.f/2, 180.f/2);
+    this->_view.setSize(320.f, 180.f);
 
     this->_window.setView(_view);
 }
@@ -64,12 +65,14 @@ int GameWindow::handleEventsMenu(void)
     return result;  // 0 = do nothing    1 = close game    2 = start game
 }
 
-void GameWindow::handleEventsGame(void)
+int GameWindow::handleEventsGame(void)
 {
     sf::Event event;
+    int result = 0;
     while (this->_window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed) {
+            result = 1;
             this->_window.close();
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
@@ -77,14 +80,17 @@ void GameWindow::handleEventsGame(void)
             break;
         }
     }
+    return result;
 }
 
-void GameWindow::handleEventsPause(void)
+int GameWindow::handleEventsPause(void)
 {
     sf::Event event;
+    int result = 0;
     while (this->_window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed) {
+            result = 1;
             this->_window.close();
         }
         else if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -123,6 +129,7 @@ void GameWindow::handleEventsPause(void)
             }
         }
     }
+    return result;
 }
 
 void GameWindow::clear(void)

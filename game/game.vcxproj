@@ -134,7 +134,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedMainCharacter.cpp" />
-    <ClCompile Include="AnimatedPokemon.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="main.cpp" />
@@ -144,14 +143,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedMainCharacter.h" />
-    <ClInclude Include="AnimatedPokemon.h" />
     <ClInclude Include="ConfigMainCharacter.h" />
     <ClInclude Include="ConfigMap.h" />
     <ClInclude Include="ConfigPokemonSprites.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="MenuWindow.h" />
-    <ClInclude Include="Pause.h" />
     <ClInclude Include="MainCharacter.h" />
     <ClInclude Include="MapArray.h" />
     <ClInclude Include="TileMap.h" />

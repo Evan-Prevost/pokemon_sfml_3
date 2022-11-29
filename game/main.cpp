@@ -36,23 +36,21 @@ int main()
 
             while (window.isOpen() && currentWindow == 0) {
                 window.clear();
-                int x = window.handleEventsMenu();
-                std::cout << currentWindow;
-                switch (x) {
+                int result = window.handleEventsMenu();
+                switch (result) {
                 case 1:
                     gameOn = false;
-                    std::cout << "in 1";
                 case 2:
                     currentWindow = 1;
-                    std::cout << "in 2";
+                default :
+                    window.drawEntity(background);
+                    window.drawEntity(start);
+                    window.display();
                 }
-                window.drawEntity(background);
-                window.drawEntity(start);
-                window.display();
             }
         }
         else if (currentWindow == 1) { //Game
-            
+            window._view.setCenter(INITIAL_POS);
 
             //character
             sf::Texture texture;
@@ -66,7 +64,7 @@ int main()
             if (!pauseTexture.loadFromFile("data/assets/pause.png"))
                 return -1;
             Entity pause = Entity(pauseTexture);
-            pause.setPosition(INITIAL_VIEW_RECT.left, INITIAL_VIEW_RECT.top);
+            pause.setPosition(window._view.getCenter().x - pauseTexture.getSize().x / 2, window._view.getCenter().y - pauseTexture.getSize().y / 2);
 
             //tilemap
             TileMap Ocean, Island, Trees_1, Trees_2, Trees_3, Plateau, Flower_grass, Bushes, Fence, House_trees, House, Dock/*, Collisions*//*, Battle_zones*/, Foreground_objects;
@@ -106,52 +104,68 @@ int main()
             {
                 if (window.isPause()) {
                     window.handleEventsPause();
-                    window.drawEntity(pause);
+                    int result = window.handleEventsMenu();
+                    switch (result) {
+                    case 1:
+                        gameOn = false;
+                    case 2:
+                        currentWindow = 1;
+                    default :
+                        pause.setPosition(window._view.getCenter().x - pauseTexture.getSize().x / 2, window._view.getCenter().y - pauseTexture.getSize().y / 2);
+                        window.drawEntity(pause);
+                    }
                 }
                 else {
                     window.clear();
                     window.handleEventsGame();
+                    int result = window.handleEventsMenu();
+                    switch (result) {
+                    case 1:
+                        gameOn = false;
+                    case 2:
+                        currentWindow = 1;
+                    default:
+                        // camera folow character
+                        /*window._view(mainCharacter);*/
 
-                    // camera folow character
-                    /*window._view(mainCharacter);*/
+                // movement main character
+                        mainCharacter.handKeys(window._view);
 
-            // movement main character
-            mainCharacter.handKeys(window._view);
+                        if (countFrame % 15 == 0)
+                        {
+                            mainCharacter.nextAnimation();
+                            countFrame = 0;
+                        }
+                        countFrame++;
 
-                    if (countFrame % 15 == 0)
-                    {
-                        mainCharacter.nextAnimation();
-                        countFrame = 0;
+                        // build map
+
+                        // core
+                        window.drawMap(Ocean);
+                        window.drawMap(Island);
+                        window.drawMap(Trees_1);
+                        window.drawMap(Trees_2);
+                        window.drawMap(Trees_3);
+                        window.drawMap(Plateau);
+                        window.drawMap(Flower_grass);
+
+                        //// objects
+                        window.drawMap(Bushes);
+                        window.drawMap(Fence);
+                        window.drawMap(House_trees);
+                        window.drawMap(House);
+                        window.drawMap(Dock);
+
+                        // debuging
+                        //window.drawMap(Collisions);
+                        //window.drawMap(Battle_zones);
+
+                        //// character
+                        window.drawEntity(mainCharacter);
+
+                        //// foreground objects
+                        window.drawMap(Foreground_objects);
                     }
-                    countFrame++;
-
-                    // build map
-
-                    // core
-                    window.drawMap(Ocean);
-                    window.drawMap(Island);
-                    window.drawMap(Trees_1);
-                    window.drawMap(Trees_2);
-                    window.drawMap(Trees_3);
-                    window.drawMap(Plateau);
-                    window.drawMap(Flower_grass);
-
-                    //// objects
-                    window.drawMap(Bushes);
-                    window.drawMap(Fence);
-                    window.drawMap(House_trees);
-                    window.drawMap(House);
-                    window.drawMap(Dock);
-
-                    // debuging
-                    //window.drawMap(Collisions);
-                    //window.drawMap(Battle_zones);
-
-                    //// character
-                    window.drawEntity(mainCharacter);
-
-                    //// foreground objects
-                    window.drawMap(Foreground_objects);
                 }
                 // display window
                 window.display();
