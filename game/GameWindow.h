@@ -9,10 +9,11 @@ class GameWindow
 {
 private:
     sf::RenderWindow _window;
-    sf::View _view;
     bool _pause = false;
 
 public:
+    sf::View _view;
+
     GameWindow(void);
     //
     bool isOpen(void) const;

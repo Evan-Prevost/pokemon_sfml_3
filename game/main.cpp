@@ -11,7 +11,6 @@
 #include "Entity.h"
 #include "TileMap.h"
 
-
 int main()
 {
     GameWindow window;
@@ -116,8 +115,8 @@ int main()
                     // camera folow character
                     /*window._view(mainCharacter);*/
 
-                    // movement main character
-                    mainCharacter.handKeys();
+            // movement main character
+            mainCharacter.handKeys(gameWindow._view);
 
                     if (countFrame % 15 == 0)
                     {
