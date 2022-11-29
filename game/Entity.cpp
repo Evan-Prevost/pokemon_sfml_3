@@ -19,7 +19,7 @@ void Entity::setPosition(float x, float y)
     this->_sprite.setPosition(x, y);
 }
 
-void Entity::handKeys(void)
+/*void Entity::handKeys(void)
 {
     // UP
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
@@ -41,7 +41,7 @@ void Entity::handKeys(void)
     {
         this->_sprite.move(m_speed, 0);
     }
-}
+}*/
 
 void Entity::setScale(float x, float y) {
     this->_sprite.setScale(x, y);

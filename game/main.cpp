@@ -56,7 +56,7 @@ int main()
 
             //character
             sf::Texture texture;
-            if (!texture.loadFromFile(MAIN_CHARACTER_DOWN_TEXTURE_PATH))
+            if (!texture.loadFromFile(MAIN_CHARACTER_TEXTURE_PATH))
                 return -1;
             MainCharacter mainCharacter = MainCharacter(texture);
             mainCharacter.setPosition(300.f, 210.f);
@@ -116,7 +116,7 @@ int main()
                     /*window._view(mainCharacter);*/
 
             // movement main character
-            mainCharacter.handKeys(gameWindow._view);
+            mainCharacter.handKeys(window._view);
 
                     if (countFrame % 15 == 0)
                     {
