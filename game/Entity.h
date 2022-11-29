@@ -21,6 +21,7 @@ public:
     void handKeys(void);
     //
     void setPosition(float x, float y);
-
     sf::Vector2f GetPosition() { return _sprite.getPosition(); }
+
+    void setScale(float x, float y);
 };

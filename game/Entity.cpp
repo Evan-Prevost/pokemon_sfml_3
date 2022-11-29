@@ -42,3 +42,7 @@ void Entity::handKeys(void)
         this->_sprite.move(m_speed, 0);
     }
 }
+
+void Entity::setScale(float x, float y) {
+    this->_sprite.setScale(x, y);
+}
