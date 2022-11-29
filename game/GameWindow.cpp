@@ -86,6 +86,7 @@ void GameWindow::clear(void)
 
 void GameWindow::display(void)
 {
+    this->_window.setView(_view);
     this->_window.display();
 }
 

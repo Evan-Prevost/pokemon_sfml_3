@@ -25,30 +25,34 @@ void AnimatedMainCharacter::nextAnimation(void)
     this->_sprite.setTextureRect(_animation_pos[this->_count][this->currentAnimation]);
 }
 
-void AnimatedMainCharacter::handKeys(void)
+void AnimatedMainCharacter::handKeys(sf::View& view)
 {
     // UP
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
     {
-        this->_sprite.move(0, -m_speed);
+        this->_sprite.move(0, -m_unitDeplacement);
         this->_count = 3;
+        view.move(0, -m_unitDeplacement);
     }
     // DOWN
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        this->_sprite.move(0, m_speed);
+        this->_sprite.move(0, m_unitDeplacement);
         this->_count = 1;
+        view.move(0, m_unitDeplacement);
     }
     // LEFT
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
     {
-        this->_sprite.move(-m_speed, 0);
+        this->_sprite.move(-m_unitDeplacement, 0);
         this->_count = 2;
+        view.move(-m_unitDeplacement, 0);
     }
     // RIGHT
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        this->_sprite.move(m_speed, 0);
+        this->_sprite.move(m_unitDeplacement, 0);
         this->_count = 0;
+        view.move(m_unitDeplacement, 0);
     }
 }

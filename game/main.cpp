@@ -9,7 +9,6 @@
 #include "Entity.h"
 #include "TileMap.h"
 
-
 int main()
 {
     GameWindow gameWindow;
@@ -27,10 +26,8 @@ int main()
     Entity pause = Entity(pauseTexture);
     pause.setPosition(INITIAL_VIEW_RECT.left, INITIAL_VIEW_RECT.top);
 
-
-
     // on crée la tilemap
-    TileMap Ocean, Island, Trees_1, Trees_2, Trees_3, Plateau, Flower_grass, Bushes, Fence, House_trees, House, Dock/*, Collisions*//*, Battle_zones*/, Foreground_objects;
+    TileMap Ocean, Island, Trees_1, Trees_2, Trees_3, Plateau, Flower_grass, Bushes, Fence, House_trees, House, Dock/*, Collisions*/ /*, Battle_zones*/, Foreground_objects;
 
     if (!Ocean.load(TILE_MAP_PATH, sf::Vector2u(12, 12), ocean, 70, 40))
         return -1;
@@ -68,7 +65,6 @@ int main()
     // init main character position
     mainCharacter.setPosition(300.f, 210.f);
 
-
     int countFrame = 0;
 
     while (gameWindow.isOpen())
@@ -85,7 +81,7 @@ int main()
             /*gameWindow._view(mainCharacter);*/
 
             // movement main character
-            mainCharacter.handKeys();
+            mainCharacter.handKeys(gameWindow._view);
 
             if (countFrame % 15 == 0)
             {
@@ -113,7 +109,7 @@ int main()
             gameWindow.drawMap(Dock);
 
             // debuging
-            //gameWindow.drawMap(Collisions);
+            /*gameWindow.drawMap(Collisions);*/
             //gameWindow.drawMap(Battle_zones);
 
             //// character
