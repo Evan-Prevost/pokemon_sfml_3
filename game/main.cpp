@@ -12,10 +12,10 @@
 
 int main()
 {
-    GameWindow window;
+    GameWindow gameWindow;
 
     sf::Texture texture;
-    if (!texture.loadFromFile(MAIN_CHARACTER_DOWN_TEXTURE_PATH))
+    if (!texture.loadFromFile(MAIN_CHARACTER_TEXTURE_PATH))
     {
         // error...
     }
@@ -68,19 +68,21 @@ int main()
     // init main character position
     mainCharacter.setPosition(300.f, 210.f);
 
+
     int countFrame = 0;
-    while (window.isOpen())
+
+    while (gameWindow.isOpen())
     {
-        if (window.isPause()) {
-            window.handleEventsPause();
-            window.drawEntity(pause);
+        if (gameWindow.isPause()) {
+            gameWindow.handleEventsPause();
+            gameWindow.drawEntity(pause);
         }
         else {
-            window.clear();
-            window.handleEventsGame();
+            gameWindow.clear();
+            gameWindow.handleEventsGame();
             
             // camera folow character
-            /*window._view(mainCharacter);*/
+            /*gameWindow._view(mainCharacter);*/
 
             // movement main character
             mainCharacter.handKeys();
@@ -95,33 +97,33 @@ int main()
             // build map
 
             // core
-            window.drawMap(Ocean);
-            window.drawMap(Island);
-            window.drawMap(Trees_1);
-            window.drawMap(Trees_2);
-            window.drawMap(Trees_3);
-            window.drawMap(Plateau);
-            window.drawMap(Flower_grass);
+            gameWindow.drawMap(Ocean);
+            gameWindow.drawMap(Island);
+            gameWindow.drawMap(Trees_1);
+            gameWindow.drawMap(Trees_2);
+            gameWindow.drawMap(Trees_3);
+            gameWindow.drawMap(Plateau);
+            gameWindow.drawMap(Flower_grass);
 
             //// objects
-            window.drawMap(Bushes);
-            window.drawMap(Fence);
-            window.drawMap(House_trees);
-            window.drawMap(House);
-            window.drawMap(Dock);
+            gameWindow.drawMap(Bushes);
+            gameWindow.drawMap(Fence);
+            gameWindow.drawMap(House_trees);
+            gameWindow.drawMap(House);
+            gameWindow.drawMap(Dock);
 
             // debuging
-            //window.drawMap(Collisions);
-            //window.drawMap(Battle_zones);
+            //gameWindow.drawMap(Collisions);
+            //gameWindow.drawMap(Battle_zones);
 
             //// character
-            window.drawEntity(mainCharacter);
+            gameWindow.drawEntity(mainCharacter);
 
             //// foreground objects
-            window.drawMap(Foreground_objects);
+            gameWindow.drawMap(Foreground_objects);
         }
-        // display window
-        window.display();
+        // display gameWindow
+        gameWindow.display();
 
     }
     
