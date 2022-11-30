@@ -10,10 +10,17 @@
 #include "MenuWindow.h"
 #include "Entity.h"
 #include "TileMap.h"
+#include "TextBox.h"
+#include "Button.h"
 
 int main()
 {
     GameWindow window;
+    sf::Font font;
+    if (!font.loadFromFile("data/assets/font.ttf"))
+    {
+        // erreur...
+    }
 
     int countFrame = 0;
     int currentWindow = 0;
@@ -23,16 +30,27 @@ int main()
             
 
             sf::Texture textureBG;
-            if (!textureBG.loadFromFile(MENU_BACKGROUND_PATH))
+            if (!textureBG.loadFromFile(BACKGROUND_PATH))
                 return -1;
             Entity background = Entity(textureBG);
-
+            /*
             sf::Texture textureSB;
             if (!textureSB.loadFromFile(MENU_STARTBUTTON_PATH))
                 return -1;
             Entity start = Entity(textureSB);
             start.setPosition(window.getSize().x / 2 - 50, window.getSize().y / 2);
+            */
 
+            sf::Texture textureBox;
+            if (!textureBox.loadFromFile(BOX_PATH))
+                return -1;
+
+            Button startButton = Button(textureBox, font, "START");
+            startButton.setPosition(window.getSize().x / 2 - 50, window.getSize().y / 2);
+
+            Button quitButton = Button(textureBox, font, "QUIT");
+            quitButton.setPosition(window.getSize().x / 2 - 50, window.getSize().y / 2 + 40);
+            
 
             while (window.isOpen() && currentWindow == 0) {
                 window.clear();
@@ -44,7 +62,7 @@ int main()
                     currentWindow = 1;
                 default :
                     window.drawEntity(background);
-                    window.drawEntity(start);
+                    window.drawButton(startButton);
                     window.display();
                 }
             }
@@ -171,6 +189,9 @@ int main()
                 window.display();
 
             }
+        }
+        else if (currentWindow == 2) {
+            
         }
     }
     return 0;

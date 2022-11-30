@@ -19,6 +19,11 @@ bool GameWindow::isOpen(void) const
     return this->_window.isOpen();
 }
 
+bool GameWindow::isPause(void)
+{
+    return this->_pause;
+}
+
 int GameWindow::handleEventsMenu(void)
 {
     sf::Event event;
@@ -35,23 +40,6 @@ int GameWindow::handleEventsMenu(void)
 
             int ratio = this->_window.getSize().x / this->_view.getSize().x;
             sf::Vector2f size = this->_view.getSize();
-
-            /*std::cout << size.x / 2 - 50;
-            std::cout << " ";
-            std::cout << mousePosition.x / ratio;
-            std::cout << " ";
-            std::cout << size.x / 2 + 50;
-
-            std::cout << std::endl;
-
-
-            std::cout << size.y / 2;
-            std::cout << " ";
-            std::cout << mousePosition.y / ratio;
-            std::cout << " ";
-            std::cout << size.y / 2 + 30;
-            std::cout << std::endl;
-            std::cout << std::endl;*/
 
             if (mousePosition.y / ratio >= size.y / 2 && mousePosition.y / ratio <= size.y / 2 + 30) {
                 if (mousePosition.x / ratio >= size.x / 2 - 50 && mousePosition.y / ratio <= size.x / 2 + 50) {
@@ -159,7 +147,7 @@ void GameWindow::drawMap(const TileMap& tilemap)
     this->_window.draw(tilemap);
 }
 
-bool GameWindow::isPause(void) 
-{
-    return this->_pause;
+void GameWindow::drawButton(const Button& button) {
+    this->_window.draw(button.getSprite());
+    this->_window.draw(button.getText());
 }
