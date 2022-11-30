@@ -17,7 +17,7 @@ int main()
 {
     GameWindow window;
     sf::Font font;
-    if (!font.loadFromFile("data/assets/font.ttf"))
+    if (!font.loadFromFile("data/assets/font3.ttf"))
     {
         // erreur...
     }
@@ -55,16 +55,15 @@ int main()
             while (window.isOpen() && currentWindow == 0) {
                 window.clear();
                 int result = window.handleEventsMenu();
-                switch (result) {
-                case 1:
+                if (result == 1) {
                     gameOn = false;
-                case 2:
-                    currentWindow = 1;
-                default :
-                    window.drawEntity(background);
-                    window.drawButton(startButton);
-                    window.display();
                 }
+                if (window.isPressed(startButton)) {
+                    currentWindow = 1;
+                }
+                window.drawEntity(background);
+                window.drawButton(startButton);
+                window.display();
             }
         }
         else if (currentWindow == 1) { //Game

@@ -35,4 +35,6 @@ public:
     void drawEntity(const Entity&);
     void drawMap(const TileMap&);
     void drawButton(const Button&);
+
+    bool isPressed(const Button&);
 };

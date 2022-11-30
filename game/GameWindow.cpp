@@ -35,19 +35,6 @@ int GameWindow::handleEventsMenu(void)
             result = 1;
             break;
         }
-        else if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(this->_window);
-
-            int ratio = this->_window.getSize().x / this->_view.getSize().x;
-            sf::Vector2f size = this->_view.getSize();
-
-            if (mousePosition.y / ratio >= size.y / 2 && mousePosition.y / ratio <= size.y / 2 + 30) {
-                if (mousePosition.x / ratio >= size.x / 2 - 50 && mousePosition.y / ratio <= size.x / 2 + 50) {
-                    result = 2;
-                    break;
-                }
-            }
-        }
 
     }
     return result;  // 0 = do nothing    1 = close game    2 = start game
@@ -150,4 +137,42 @@ void GameWindow::drawMap(const TileMap& tilemap)
 void GameWindow::drawButton(const Button& button) {
     this->_window.draw(button.getSprite());
     this->_window.draw(button.getText());
+}
+
+bool GameWindow::isPressed(const Button& button) {
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(_window);
+
+        int ratio = _window.getSize().x /_view.getSize().x;
+
+        sf::Vector2f spritePosition = button.getSprite().getPosition();
+        sf::Vector2u spriteSize = button.getSprite().getTexture()->getSize();
+
+        std::cout << ratio;
+        std::cout << "   ";
+        std::cout << spritePosition.x;
+        std::cout << " " ;
+        std::cout << mousePosition.x / ratio;
+        std::cout << " ";
+        std::cout << spritePosition.x + spriteSize.x;
+        std::cout << "   ";
+        std::cout << spritePosition.y;
+        std::cout << " ";
+        std::cout << mousePosition.y / ratio;
+        std::cout << " ";
+        std::cout << spritePosition.y + spriteSize.y;
+        std::cout << std::endl;
+
+
+
+        if (mousePosition.x / ratio >= spritePosition.x
+            && mousePosition.x / ratio <= spritePosition.x + spriteSize.x
+            && mousePosition.y / ratio >= spritePosition.y
+            && mousePosition.y / ratio <= spritePosition.y + spriteSize.y)
+        {
+            return true;
+        }
+    }
+    return false;
 }

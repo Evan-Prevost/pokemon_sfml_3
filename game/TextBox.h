@@ -4,7 +4,6 @@
 #include <string>
 
 #include "Entity.h"
-#include "GameWindow.h"
 
 class TextBox : public Entity {
 protected :
