@@ -24,7 +24,8 @@ int main()
     if (!font.loadFromFile("data/assets/font3.ttf"))
         return -1;
 
-    sf::Music menu, main; 
+    // musiques
+    sf::Music menu, main;
     
     menu.setVolume(50.f);
     main.setVolume(20.f);
