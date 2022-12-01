@@ -40,12 +40,7 @@ int main()
             if (!textureBG.loadFromFile(BACKGROUND_PATH))
                 return -1;
             Entity background = Entity(textureBG);
-
-            sf::Texture textureSB;
-            if (!textureSB.loadFromFile(MENU_STARTBUTTON_PATH))
-                return -1;
-            Entity start = Entity(textureSB);
-            start.setPosition(window.getSize().x / 2 - 50, window.getSize().y / 2);
+            
 
             Button startButton = Button(textureButton, font, "START");
             startButton.setPosition(window.getSize().x / 2 - 50, window.getSize().y / 2);
@@ -118,7 +113,7 @@ int main()
             if (!Foreground_objects.load(TILE_MAP_PATH, sf::Vector2u(12, 12), foreground_objects, 70, 40))
                 return -1;
 
-            while (gameWindow.isOpen())
+            while (window.isOpen())
             {
                 if (window.isPause()) {
                     window.handleEventsPause();
@@ -160,39 +155,42 @@ int main()
                         // build map
 
                         // core
-                        gameWindow.drawMap(Ocean);
-                        gameWindow.drawMap(Island);
-                        gameWindow.drawMap(Trees_1);
-                        gameWindow.drawMap(Trees_2);
-                        gameWindow.drawMap(Trees_3);
-                        gameWindow.drawMap(Plateau);
-                        gameWindow.drawMap(Flower_grass);
+                        window.drawMap(Ocean);
+                        window.drawMap(Island);
+                        window.drawMap(Trees_1);
+                        window.drawMap(Trees_2);
+                        window.drawMap(Trees_3);
+                        window.drawMap(Plateau);
+                        window.drawMap(Flower_grass);
 
                         //// objects
-                        gameWindow.drawMap(Bushes);
-                        gameWindow.drawMap(Fence);
-                        gameWindow.drawMap(House_trees);
-                        gameWindow.drawMap(House);
-                        gameWindow.drawMap(Dock);
+                        window.drawMap(Bushes);
+                        window.drawMap(Fence);
+                        window.drawMap(House_trees);
+                        window.drawMap(House);
+                        window.drawMap(Dock);
 
                         //// character
-                        gameWindow.drawSprite(mainCharacter.getBoxCollision());
-                        gameWindow.drawEntity(mainCharacter);
+                        window.drawSprite(mainCharacter.getBoxCollision());
+                        window.drawEntity(mainCharacter);
 
                         //// foreground objects
-                        gameWindow.drawMap(Foreground_objects);
+                        window.drawMap(Foreground_objects);
 
                         // Collisions
                         //gameWindow.drawMap(collisions);
 
                         // debuging
-                        gameWindow.drawMap(CollisionsVisible);
+                        window.drawMap(CollisionsVisible);
                         //gameWindow.drawMap(Battle_zones);
                     }
-                    // display gameWindow
-                    gameWindow.display();
+                    if (result == 2) {
+                        pause.setPosition(window._view.getCenter());
 
+                    }
                 }
+                // display window
+                window.display();
             }
         }
     }
