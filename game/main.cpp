@@ -24,14 +24,19 @@ int main()
     if (!font.loadFromFile("data/assets/font3.ttf"))
         return -1;
 
-    sf::Music music;
+    sf::Music menu, main; 
+    
+    menu.setVolume(50.f);
+    main.setVolume(20.f);
 
-    if (!music.openFromFile("data/sound/music/mainTheme.wav"))
+    if (!menu.openFromFile("data/sound/music/menuTheme.wav"))
     {
         std::cout << "ERROR" << std::endl;
     }
-
-    music.play();
+    if (!main.openFromFile("data/sound/music/mainTheme.wav"))
+    {
+        std::cout << "ERROR" << std::endl;
+    }
 
     sf::Texture textureButton;
     if (!textureButton.loadFromFile("data/assets/boxes/100x30.png"))
@@ -47,8 +52,12 @@ int main()
 
     bool gameOn = true;
     while (gameOn) {
-        if (currentWindow == 0) { //menu
+        if (currentWindow == 0) { 
             
+            //menu
+
+            main.stop();
+            menu.play();
 
             sf::Texture textureBG;
             if (!textureBG.loadFromFile("data/assets/titleBackground.png"))
@@ -77,7 +86,13 @@ int main()
                 window.display();
             }
         }
-        else if (currentWindow == 1) { //Game
+        else if (currentWindow == 1) { 
+            
+            // stop playback and rewind
+            menu.stop();
+            main.play();
+
+            //Game
             window._view.setCenter(lastCharacterPosition);
 
             //character
@@ -130,6 +145,9 @@ int main()
             while (window.isOpen() && currentWindow == 1)
             {
                 if (window.isPause()) {
+
+                    main.pause();
+
                     window.handleEventsPause();
                     int result = window.handleEventsPause();
                     if(result == 1) {
@@ -138,10 +156,13 @@ int main()
                         //window.drawPause(pause);
                     }
                     else if (window.isPressed(pause._resume)) {
+                        // resume playback
+                        main.play();
                         window._pause = false;
                     }
                     else if (window.isPressed(pause._quit)) {
                         window._window.close();
+                        main.stop();
                         gameOn = false;
                     }
                     window.drawPause(pause);
@@ -203,12 +224,12 @@ int main()
 
                     }
                 }
-        
                 // display window
                 window.display();
             }
         }
         else if (currentWindow == 2) {
+
             window._view.setCenter(320.f/2,180.f/2);
 
             sf::Texture textureBG;
