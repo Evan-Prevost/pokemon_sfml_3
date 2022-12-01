@@ -14,9 +14,15 @@ protected:
     // speed main character
     float m_unitDeplacement = 1.0f;
 
+    sf::RectangleShape boxCollision;
+
 public:
     AnimatedMainCharacter(const sf::Texture&, std::vector< std::vector<sf::IntRect>>);
     void nextAnimation(void);
     void handKeys(sf::View &_view);
-    /*void StopAnimation(std::vector<std::vector<sf::IntRect>> animation_pos);*/
+
+    //start position box collider
+    void setPositionBoxCollider(float x, float y);
+
+    const sf::RectangleShape& getBoxCollision() const;
 };

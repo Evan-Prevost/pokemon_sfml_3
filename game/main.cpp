@@ -58,7 +58,7 @@ int main()
                 return -1;
             MainCharacter mainCharacter(texture);
             mainCharacter.setPosition(300.f, 210.f);
-            
+            mainCharacter.setPositionBoxCollider(306.f, 224.f);
 
             //pause
             sf::Texture pauseTexture;
@@ -157,8 +157,8 @@ int main()
                         gameWindow.drawMap(Dock);
 
                         //// character
-                        gameWindow.drawEntity(mainCharacter);
                         gameWindow.drawSprite(mainCharacter.getBoxCollision());
+                        gameWindow.drawEntity(mainCharacter);
 
                         //// foreground objects
                         gameWindow.drawMap(Foreground_objects);
