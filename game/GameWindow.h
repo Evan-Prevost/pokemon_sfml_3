@@ -30,6 +30,7 @@ public:
     
     //
     void drawEntity(const Entity&);
+    void drawSprite(const sf::Drawable&);
     void drawMap(const TileMap&);
     bool isPause(void);
 };

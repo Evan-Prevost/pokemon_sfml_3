@@ -56,8 +56,9 @@ int main()
             sf::Texture texture;
             if (!texture.loadFromFile(MAIN_CHARACTER_TEXTURE_PATH))
                 return -1;
-            MainCharacter mainCharacter = MainCharacter(texture);
+            MainCharacter mainCharacter(texture);
             mainCharacter.setPosition(300.f, 210.f);
+            
 
             //pause
             sf::Texture pauseTexture;
@@ -122,13 +123,10 @@ int main()
                     gameWindow.handleEventsGame();
                     int result = gameWindow.handleEventsMenu();
                     switch (result) {
-                    case 1:
-                        gameOn = false;
-                    case 2:
-                        currentWindow = 1;
                     default:
-                        // camera folow character
-                        /*gameWindow._view(mainCharacter);*/
+                        gameOn = false;
+                    case 1:
+                        currentWindow = 1;
 
                 // movement main character
                         mainCharacter.handKeys(gameWindow._view);
@@ -160,6 +158,7 @@ int main()
 
                         //// character
                         gameWindow.drawEntity(mainCharacter);
+                        gameWindow.drawSprite(mainCharacter.getBoxCollision());
 
                         //// foreground objects
                         gameWindow.drawMap(Foreground_objects);
