@@ -11,9 +11,10 @@ protected :
 	sf::Text _text;
 	
 public :
-	//Button(const sf::Texture& texture);
+	TextBox();
 	TextBox(const sf::Texture& texture, const sf::Font& font , std::string string);
 
 	const sf::Text& getText() const;
 	void setText(std::string);
+	void setPosition(float x, float y);
 };

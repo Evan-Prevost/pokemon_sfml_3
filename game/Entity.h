@@ -6,9 +6,10 @@ class Entity
 {
 protected:
     sf::Sprite _sprite;
-    const sf::Texture& _texture;
+    //const sf::Texture& _texture;
 
 public:
+    Entity();
     Entity(const sf::Texture& texture);
 
     //

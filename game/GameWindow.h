@@ -4,17 +4,17 @@
 #include "Entity.h"
 #include "MapArray.h"
 #include "TileMap.h"
+#include "TextBox.h"
 #include "Button.h"
+#include "PauseMenu.h"
 
 class GameWindow
 {
-private:
-    bool _pause = false;
-
 public:
 
     sf::RenderWindow _window;
     sf::View _view;
+    bool _pause = false;
 
     GameWindow(void);
     //
@@ -34,7 +34,9 @@ public:
     //
     void drawEntity(const Entity&);
     void drawMap(const TileMap&);
+    void drawTextBox(const TextBox&);
     void drawButton(const Button&);
+    void drawPause(const PauseMenu&);
 
     bool isPressed(const Button&);
 };

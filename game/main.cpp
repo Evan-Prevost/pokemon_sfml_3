@@ -12,15 +12,22 @@
 #include "TileMap.h"
 #include "TextBox.h"
 #include "Button.h"
+#include "PauseMenu.h"
 
 int main()
 {
     GameWindow window;
     sf::Font font;
     if (!font.loadFromFile("data/assets/font3.ttf"))
-    {
-        // erreur...
-    }
+        return -1;
+
+    sf::Texture textureButton;
+    if (!textureButton.loadFromFile("data/assets/boxes/100x30.png"))
+        return -1;
+
+    sf::Texture texturePauseBG;
+    if (!texturePauseBG.loadFromFile("data/assets/boxes/200x100.png"))
+        return -1;
 
     int countFrame = 0;
     int currentWindow = 0;
@@ -33,22 +40,12 @@ int main()
             if (!textureBG.loadFromFile(BACKGROUND_PATH))
                 return -1;
             Entity background = Entity(textureBG);
-            /*
-            sf::Texture textureSB;
-            if (!textureSB.loadFromFile(MENU_STARTBUTTON_PATH))
-                return -1;
-            Entity start = Entity(textureSB);
-            start.setPosition(window.getSize().x / 2 - 50, window.getSize().y / 2);
-            */
 
-            sf::Texture textureBox;
-            if (!textureBox.loadFromFile(BOX_PATH))
-                return -1;
 
-            Button startButton = Button(textureBox, font, "START");
+            Button startButton = Button(textureButton, font, "START");
             startButton.setPosition(window.getSize().x / 2 - 50, window.getSize().y / 2);
 
-            Button quitButton = Button(textureBox, font, "QUIT");
+            Button quitButton = Button(textureButton, font, "QUIT");
             quitButton.setPosition(window.getSize().x / 2 - 50, window.getSize().y / 2 + 40);
             
 
@@ -58,7 +55,7 @@ int main()
                 if (result == 1) {
                     gameOn = false;
                 }
-                if (window.isPressed(startButton)) {
+                else if (window.isPressed(startButton)) {
                     currentWindow = 1;
                 }
                 window.drawEntity(background);
@@ -70,18 +67,14 @@ int main()
             window._view.setCenter(INITIAL_POS);
 
             //character
-            sf::Texture texture;
-            if (!texture.loadFromFile(MAIN_CHARACTER_TEXTURE_PATH))
+            sf::Texture textureCharacter;
+            if (!textureCharacter.loadFromFile(MAIN_CHARACTER_TEXTURE_PATH))
                 return -1;
-            MainCharacter mainCharacter = MainCharacter(texture);
+            MainCharacter mainCharacter = MainCharacter(textureCharacter);
             mainCharacter.setPosition(300.f, 210.f);
 
             //pause
-            sf::Texture pauseTexture;
-            if (!pauseTexture.loadFromFile("data/assets/pause.png"))
-                return -1;
-            Entity pause = Entity(pauseTexture);
-            pause.setPosition(window._view.getCenter().x - pauseTexture.getSize().x / 2, window._view.getCenter().y - pauseTexture.getSize().y / 2);
+            PauseMenu pause = PauseMenu(texturePauseBG, textureButton, font);
 
             //tilemap
             TileMap Ocean, Island, Trees_1, Trees_2, Trees_3, Plateau, Flower_grass, Bushes, Fence, House_trees, House, Dock/*, Collisions*//*, Battle_zones*/, Foreground_objects;
@@ -121,31 +114,32 @@ int main()
             {
                 if (window.isPause()) {
                     window.handleEventsPause();
-                    int result = window.handleEventsMenu();
-                    switch (result) {
-                    case 1:
+                    int result = window.handleEventsPause();
+                    if(result == 1) {
                         gameOn = false;
-                    case 2:
-                        currentWindow = 1;
-                    default :
-                        pause.setPosition(window._view.getCenter().x - pauseTexture.getSize().x / 2, window._view.getCenter().y - pauseTexture.getSize().y / 2);
-                        window.drawEntity(pause);
+                        //pause.setPosition(window._view.getCenter().x - pauseTexture.getSize().x / 2, window._view.getCenter().y - pauseTexture.getSize().y / 2);
+                        //window.drawPause(pause);
                     }
+                    else if (window.isPressed(pause._resume)) {
+                        window._pause = false;
+                    }
+                    else if (window.isPressed(pause._quit)) {
+                        window._window.close();
+                        gameOn = false;
+                    }
+                    window.drawPause(pause);
                 }
                 else {
                     window.clear();
-                    window.handleEventsGame();
-                    int result = window.handleEventsMenu();
-                    switch (result) {
-                    case 1:
+                    int result = window.handleEventsGame();
+                    if (result == 1) {
                         gameOn = false;
-                    case 2:
-                        currentWindow = 1;
-                    default:
+                    }
+                    else {
                         // camera folow character
                         /*window._view(mainCharacter);*/
 
-                // movement main character
+                        // movement main character
                         mainCharacter.handKeys(window._view);
 
                         if (countFrame % 15 == 0)
@@ -182,9 +176,14 @@ int main()
 
                         //// foreground objects
                         window.drawMap(Foreground_objects);
+
+                        if (result == 2) {
+                            pause.setPosition(window._view.getCenter());
+
+                        }
                     }
                 }
-                // display window
+
                 window.display();
 
             }

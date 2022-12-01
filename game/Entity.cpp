@@ -1,6 +1,11 @@
 #include "Entity.h"
 
-Entity::Entity(const sf::Texture& texture) : _sprite(texture), _texture(texture)
+Entity::Entity(){
+    sf::Texture texture;
+    this->_sprite.setTexture(texture);
+}
+
+Entity::Entity(const sf::Texture& texture) : _sprite(texture) /*, _texture(texture)*/
 {
 }
 
