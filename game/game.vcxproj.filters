@@ -39,9 +39,6 @@
     <ClCompile Include="MapArray.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="MenuWindow.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="AnimatedMainCharacter.cpp">
       <Filter>Fichiers sources\MainCharacter</Filter>
     </ClCompile>
@@ -60,9 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameWindow.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuWindow.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="AnimatedMainCharacter.h">
