@@ -22,11 +22,14 @@ int main()
     if (!font.loadFromFile("data/assets/font3.ttf"))
         return -1;
 
-    //sf::Music music;
-    //if (!music.openFromFile("data/sound/music/mainTheme.wav"))
-    //    return -1;
+    sf::Music music;
 
-    //music.play();
+    if (!music.openFromFile("data/sound/music/mainTheme.wav"))
+    {
+        std::cout << "ERROR" << std::endl;
+    }
+
+    music.play();
 
     sf::Texture textureButton;
     if (!textureButton.loadFromFile("data/assets/boxes/100x30.png"))
