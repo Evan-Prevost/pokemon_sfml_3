@@ -1,8 +1,6 @@
 #include "TextBox.h"
 
-
 TextBox::TextBox() : Entity() {
-
 }
 
 TextBox::TextBox(const sf::Texture& texture, const sf::Font& font, std::string string) : Entity(texture) {

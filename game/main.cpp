@@ -218,12 +218,12 @@ int main()
                 return -1;
             if (!Dock.load(TILE_MAP_PATH, sf::Vector2u(12, 12), dock, 70, 40))
                 return -1;
-            if (!CollisionsVisible.load(TILE_MAP_PATH, sf::Vector2u(12, 12), collisionsVisible, 70, 40))
-                return -1;
-            //if (!Collisions.load(TILE_MAP_PATH, sf::Vector2u(12, 12), collisions, 70, 40))
-            //    return -1;
-            //if (!Battle_zones.load(TILE_MAP_PATH, sf::Vector2u(12, 12), battle_zones, 70, 40))
-            //    return -1;
+            /*if (!CollisionsVisible.load(TILE_MAP_PATH, sf::Vector2u(12, 12), collisionsVisible, 70, 40))
+                return -1;*/
+            /*if (!Collisions.load(TILE_MAP_PATH, sf::Vector2u(12, 12), collisions, 70, 40))
+                return -1;*/
+            /*if (!Battle_zones.load(TILE_MAP_PATH, sf::Vector2u(12, 12), battle_zones, 70, 40))
+                return -1;*/
             if (!Foreground_objects.load(TILE_MAP_PATH, sf::Vector2u(12, 12), foreground_objects, 70, 40))
                 return -1;
 
@@ -302,7 +302,7 @@ int main()
                         //gameWindow.drawMap(collisions);
 
                         // debuging
-                        window.drawMap(CollisionsVisible);
+                        //window.drawMap(CollisionsVisible);
                         //gameWindow.drawMap(Battle_zones);
                     }
                     if (result == 2) {

@@ -11,8 +11,6 @@ PauseMenu::PauseMenu(const sf::Texture& tBackground, const sf::Texture& tBox, co
 void PauseMenu::setPosition(sf::Vector2f center) {
 	sf::Vector2i BGSize(this->_background.getSprite().getTexture()->getSize());
 	
-	//std::cout<< ;
-	
 	sf::Vector2f BGPosition(center.x - BGSize.x/2, center.y - BGSize.y/2);
 
 	this->_background.setPosition(BGPosition.x,BGPosition.y);
