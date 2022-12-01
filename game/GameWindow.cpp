@@ -1,6 +1,6 @@
 #include "GameWindow.h"
-#include <iostream>
 #include "ConfigMap.h"
+#include <iostream>
 
 GameWindow::GameWindow() : _window(sf::VideoMode::getDesktopMode(), "Pokemon Like", sf::Style::None)
 {
@@ -18,7 +18,7 @@ bool GameWindow::isOpen(void) const
     return this->_window.isOpen();
 }
 
-void GameWindow::handleEventsGame(void)
+void GameWindow::handleEventsGame()
 {
     sf::Event event;
     while (this->_window.pollEvent(event))

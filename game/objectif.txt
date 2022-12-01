@@ -1,0 +1,8 @@
+play / credit / settting / quit
+
+objectifs :
+
+- collision lol
+- menu mdr
+- music jul jul jul
+- mini-map haha

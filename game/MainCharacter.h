@@ -6,4 +6,5 @@ class MainCharacter : public AnimatedMainCharacter
 {
 public :
 	MainCharacter(const sf::Texture& texture);
+
 };

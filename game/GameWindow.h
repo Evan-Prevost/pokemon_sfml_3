@@ -17,7 +17,7 @@ public:
     GameWindow(void);
     //
     bool isOpen(void) const;
-    void handleEventsGame(void);
+    void handleEventsGame();
     void handleEventsPause(void);
     void clear(void);
     void display(void);

@@ -12,6 +12,7 @@ extern int fence[];
 extern int house_trees[];
 extern int house[];
 extern int dock[];
-//extern int collisions[];
+extern int collisionsVisible[];
+extern int collisionsInvisible[];
 //extern int battle_zones[];
 extern int foreground_objects[];

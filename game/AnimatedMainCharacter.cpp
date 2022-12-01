@@ -27,6 +27,10 @@ void AnimatedMainCharacter::nextAnimation(void)
 
 void AnimatedMainCharacter::handKeys(sf::View& view)
 {
+    //if (moving)
+    //{
+    //    //
+    //}
     // UP
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
     {
@@ -56,3 +60,9 @@ void AnimatedMainCharacter::handKeys(sf::View& view)
         view.move(m_unitDeplacement, 0);
     }
 }
+
+//void AnimatedMainCharacter::StopAnimation(std::vector<std::vector<sf::IntRect>> animation_pos)
+//{
+//    this->_animation_pos = animation_pos;
+//    animation_pos.size() <= 0;
+//}
