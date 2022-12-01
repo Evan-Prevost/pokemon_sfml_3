@@ -47,7 +47,7 @@ int main()
     if (!texturePauseBG.loadFromFile("data/assets/boxes/200x100.png"))
         return -1;
 
-    int countFrame = 0;
+    
     int currentWindow = 0;
     sf::Vector2f lastCharacterPosition(INITIAL_POS);
 
@@ -60,10 +60,42 @@ int main()
             main.stop();
             menu.play();
 
-            sf::Texture textureBG;
+            sf::Texture textureTitle;
+            if (!textureTitle.loadFromFile("data/assets/background/title.png"))
+                return -1;
+            Entity title = Entity(textureTitle);
+            title.setPosition(0, -180);
+
+            sf::Texture textureSky;
+            if (!textureSky.loadFromFile("data/assets/background/titleBackgroundSky.png"))
+                return -1;
+            Entity sky = Entity(textureSky);
+            Entity sky2 = Entity(textureSky);
+            sky2.setPosition(490, 0);
+
+            sf::Texture textureSea;
+            if (!textureSea.loadFromFile("data/assets/background/titleBackgroundSea.png"))
+                return -1;
+            Entity sea = Entity(textureSea);
+
+            sf::Texture textureGround;
+            if (!textureGround.loadFromFile("data/assets/background/titleBackgroundGround.png"))
+                return -1;
+            Entity ground = Entity(textureGround);
+            Entity ground2 = Entity(textureGround);
+            ground2.setPosition(490, 0);
+
+            sf::Texture textureCharacter;
+            if (!textureCharacter.loadFromFile(MAIN_CHARACTER_TEXTURE_PATH))
+                return -1;
+            MainCharacter mainCharacter = MainCharacter(textureCharacter);
+            mainCharacter.setPosition(-100, 100);
+            mainCharacter.setScale(3,3);
+
+            /*sf::Texture textureBG;
             if (!textureBG.loadFromFile("data/assets/titleBackground.png"))
                 return -1;
-            Entity background = Entity(textureBG);
+            Entity background = Entity(textureBG);*/
             
 
             Button startButton = Button(textureButton, font, "START");
@@ -72,9 +104,10 @@ int main()
             Button quitButton = Button(textureButton, font, "QUIT");
             quitButton.setPosition(window.getSize().x / 2 - 50, window.getSize().y / 2 + 40);
             
-
+            int countFrame = 0;
             while (window.isOpen() && currentWindow == 0) {
                 window.clear();
+                //inputs
                 int result = window.handleEventsMenu();
                 if (result == 1) {
                     gameOn = false;
@@ -82,8 +115,59 @@ int main()
                 else if (window.isPressed(startButton)) {
                     currentWindow = 1;
                 }
-                window.drawEntity(background);
-                window.drawButton(startButton);
+                else if (window.isPressed(quitButton)) {
+                    window._window.close();
+                    menu.stop();
+                    gameOn = false;
+                }
+
+                //animations
+                sky.getSprite().move(-1, 0);
+                if (sky.getSprite().getPosition().x <= -490) {
+                    sky.setPosition(490, 0);
+                }
+                ground.getSprite().move(-3, 0);
+                if (ground.getSprite().getPosition().x <= -490) {
+                    ground.setPosition(490, 0);
+                }
+                sky2.getSprite().move(-1, 0);
+                if (sky2.getSprite().getPosition().x <= -490) {
+                    sky2.setPosition(490, 0);
+                }
+                ground2.getSprite().move(-3, 0);
+                if (ground2.getSprite().getPosition().x <= -490) {
+                    ground2.setPosition(490, 0);
+                }
+                
+                if (title.getSprite().getPosition().y < 0) {
+                    title.getSprite().move(0, 1);
+                }
+
+                if (title.getSprite().getPosition().y >= 0 && mainCharacter.getSprite().getPosition().x < 10) {
+                    mainCharacter.getSprite().move(1, 0);
+                }
+                if (countFrame % 10 == 0) {
+                    mainCharacter.nextAnimation();
+                    countFrame = 0;
+                }
+                countFrame++;
+
+
+                //drawings
+                //window.drawEntity(background);
+
+                window.drawEntity(sky);
+                window.drawEntity(sky2);
+                window.drawEntity(sea);
+                window.drawEntity(ground);
+                window.drawEntity(ground2);
+                window.drawEntity(title);
+                window.drawEntity(mainCharacter);
+
+                if (title.getSprite().getPosition().y >= 0) {
+                    window.drawButton(startButton);
+                    window.drawButton(quitButton);
+                }
                 window.display();
             }
         }
@@ -143,6 +227,7 @@ int main()
             if (!Foreground_objects.load(TILE_MAP_PATH, sf::Vector2u(12, 12), foreground_objects, 70, 40))
                 return -1;
 
+            int countFrame = 0;
             while (window.isOpen() && currentWindow == 1)
             {
                 if (window.isPause()) {
