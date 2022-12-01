@@ -6,10 +6,6 @@
 
 class MainCharacter : public AnimatedMainCharacter
 {
-public :
+public:
 	MainCharacter(const sf::Texture& texture);
-	
-	const sf::RectangleShape &getBoxCollision() const;
-private:
-	sf::RectangleShape boxCollision;
 };

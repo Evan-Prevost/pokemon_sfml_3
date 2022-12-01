@@ -77,7 +77,7 @@ int main()
                 return -1;
             MainCharacter mainCharacter = MainCharacter(textureCharacter);
             mainCharacter.setPosition(300.f, 210.f);
-            
+            mainCharacter.setPositionBoxCollider(306.f, 224.f);
 
             //pause
             PauseMenu pause = PauseMenu(texturePauseBG, textureButton, font);
@@ -176,8 +176,8 @@ int main()
                         gameWindow.drawMap(Dock);
 
                         //// character
-                        gameWindow.drawEntity(mainCharacter);
                         gameWindow.drawSprite(mainCharacter.getBoxCollision());
+                        gameWindow.drawEntity(mainCharacter);
 
                         //// foreground objects
                         gameWindow.drawMap(Foreground_objects);
