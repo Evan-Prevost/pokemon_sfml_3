@@ -193,6 +193,9 @@ int main()
                 window.display();
             }
         }
+        else if (currentWindow == 2) {
+            
+        }
     }
     return 0;
 }
