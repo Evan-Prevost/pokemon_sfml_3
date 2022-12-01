@@ -41,6 +41,11 @@ int main()
                 return -1;
             Entity background = Entity(textureBG);
 
+            sf::Texture textureSB;
+            if (!textureSB.loadFromFile(MENU_STARTBUTTON_PATH))
+                return -1;
+            Entity start = Entity(textureSB);
+            start.setPosition(window.getSize().x / 2 - 50, window.getSize().y / 2);
 
             Button startButton = Button(textureButton, font, "START");
             startButton.setPosition(window.getSize().x / 2 - 50, window.getSize().y / 2);
@@ -72,12 +77,13 @@ int main()
                 return -1;
             MainCharacter mainCharacter = MainCharacter(textureCharacter);
             mainCharacter.setPosition(300.f, 210.f);
+            
 
             //pause
             PauseMenu pause = PauseMenu(texturePauseBG, textureButton, font);
 
-            //tilemap
-            TileMap Ocean, Island, Trees_1, Trees_2, Trees_3, Plateau, Flower_grass, Bushes, Fence, House_trees, House, Dock/*, Collisions*//*, Battle_zones*/, Foreground_objects;
+            // on crée la tilemap
+            TileMap Ocean, Island, Trees_1, Trees_2, Trees_3, Plateau, Flower_grass, Bushes, Fence, House_trees, House, Dock, CollisionsVisible /*,Collisions*/ /*, Battle_zones*/, Foreground_objects;
 
             if (!Ocean.load(TILE_MAP_PATH, sf::Vector2u(12, 12), ocean, 70, 40))
                 return -1;
@@ -103,14 +109,16 @@ int main()
                 return -1;
             if (!Dock.load(TILE_MAP_PATH, sf::Vector2u(12, 12), dock, 70, 40))
                 return -1;
-            //if (!Collisions.load(COLLISION_MAP_PATH, sf::Vector2u(12, 12), collisions, 70, 40))
+            if (!CollisionsVisible.load(TILE_MAP_PATH, sf::Vector2u(12, 12), collisionsVisible, 70, 40))
+                return -1;
+            //if (!Collisions.load(TILE_MAP_PATH, sf::Vector2u(12, 12), collisions, 70, 40))
             //    return -1;
             //if (!Battle_zones.load(TILE_MAP_PATH, sf::Vector2u(12, 12), battle_zones, 70, 40))
             //    return -1;
             if (!Foreground_objects.load(TILE_MAP_PATH, sf::Vector2u(12, 12), foreground_objects, 70, 40))
                 return -1;
 
-            while (window.isOpen())
+            while (gameWindow.isOpen())
             {
                 if (window.isPause()) {
                     window.handleEventsPause();
@@ -152,44 +160,40 @@ int main()
                         // build map
 
                         // core
-                        window.drawMap(Ocean);
-                        window.drawMap(Island);
-                        window.drawMap(Trees_1);
-                        window.drawMap(Trees_2);
-                        window.drawMap(Trees_3);
-                        window.drawMap(Plateau);
-                        window.drawMap(Flower_grass);
+                        gameWindow.drawMap(Ocean);
+                        gameWindow.drawMap(Island);
+                        gameWindow.drawMap(Trees_1);
+                        gameWindow.drawMap(Trees_2);
+                        gameWindow.drawMap(Trees_3);
+                        gameWindow.drawMap(Plateau);
+                        gameWindow.drawMap(Flower_grass);
 
                         //// objects
-                        window.drawMap(Bushes);
-                        window.drawMap(Fence);
-                        window.drawMap(House_trees);
-                        window.drawMap(House);
-                        window.drawMap(Dock);
-
-                        // debuging
-                        //window.drawMap(Collisions);
-                        //window.drawMap(Battle_zones);
+                        gameWindow.drawMap(Bushes);
+                        gameWindow.drawMap(Fence);
+                        gameWindow.drawMap(House_trees);
+                        gameWindow.drawMap(House);
+                        gameWindow.drawMap(Dock);
 
                         //// character
-                        window.drawEntity(mainCharacter);
+                        gameWindow.drawEntity(mainCharacter);
+                        gameWindow.drawSprite(mainCharacter.getBoxCollision());
 
                         //// foreground objects
-                        window.drawMap(Foreground_objects);
+                        gameWindow.drawMap(Foreground_objects);
 
-                        if (result == 2) {
-                            pause.setPosition(window._view.getCenter());
+                        // Collisions
+                        //gameWindow.drawMap(collisions);
 
-                        }
+                        // debuging
+                        gameWindow.drawMap(CollisionsVisible);
+                        //gameWindow.drawMap(Battle_zones);
                     }
+                    // display gameWindow
+                    gameWindow.display();
+
                 }
-
-                window.display();
-
             }
-        }
-        else if (currentWindow == 2) {
-            
         }
     }
     return 0;

@@ -1,9 +1,0 @@
-play / credit / settting / quit
-
-objectifs :
-
-- collision
-- déplacement caméra
-- menu
-- music
-- mini-map

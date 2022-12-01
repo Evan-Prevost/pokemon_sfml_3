@@ -100,7 +100,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="test.txt">
+    <Text Include="objectif.txt">
       <Filter>Fichiers sources</Filter>
     </Text>
   </ItemGroup>

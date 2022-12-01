@@ -1,6 +1,6 @@
 #include "GameWindow.h"
-#include <iostream>
 #include "ConfigMap.h"
+#include <iostream>
 
 GameWindow::GameWindow() : _window(sf::VideoMode::getDesktopMode(), "Pokemon Like", sf::Style::None)
 {
@@ -93,6 +93,11 @@ sf::Vector2f GameWindow::getSize(void) {
 void GameWindow::drawEntity(const Entity& entity)
 {
     this->_window.draw(entity.getSprite());
+}
+
+void GameWindow::drawSprite(const sf::Drawable &sprite)
+{
+    this->_window.draw(sprite);
 }
 
 void GameWindow::drawMap(const TileMap& tilemap)

@@ -33,6 +33,7 @@ public:
     
     //
     void drawEntity(const Entity&);
+    void drawSprite(const sf::Drawable&);
     void drawMap(const TileMap&);
     void drawTextBox(const TextBox&);
     void drawButton(const Button&);
