@@ -12,7 +12,8 @@ AnimatedMainCharacter::AnimatedMainCharacter(const sf::Texture& texture, std::ve
 
     this->_sprite.setTextureRect(this->_animation_pos[this->_count][this->currentAnimation]);
 
-    this->boxCollision.setFillColor(sf::Color(100, 250, 50));
+    // uncomment to see box collision 
+    this->boxCollision.setFillColor(sf::Color(0, 0, 0, 50));
 }
 
 void AnimatedMainCharacter::nextAnimation(void)
