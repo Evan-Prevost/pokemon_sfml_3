@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 
 #include "MainCharacter.h"
@@ -20,6 +21,12 @@ int main()
     sf::Font font;
     if (!font.loadFromFile("data/assets/font3.ttf"))
         return -1;
+
+    //sf::Music music;
+    //if (!music.openFromFile("data/sound/music/mainTheme.wav"))
+    //    return -1;
+
+    //music.play();
 
     sf::Texture textureButton;
     if (!textureButton.loadFromFile("data/assets/boxes/100x30.png"))
@@ -189,6 +196,7 @@ int main()
 
                     }
                 }
+        
                 // display window
                 window.display();
             }
