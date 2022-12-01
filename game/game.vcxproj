@@ -142,7 +142,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainCharacter.cpp" />
     <ClCompile Include="MapArray.cpp" />
-    <ClCompile Include="MenuWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedMainCharacter.h" />
@@ -154,7 +153,6 @@
     <ClInclude Include="ConfigPokemonSprites.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameWindow.h" />
-    <ClInclude Include="MenuWindow.h" />
     <ClInclude Include="MainCharacter.h" />
     <ClInclude Include="MapArray.h" />
     <ClInclude Include="TileMap.h" />

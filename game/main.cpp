@@ -5,10 +5,12 @@
 
 #include "MainCharacter.h"
 #include "AnimatedMainCharacter.h"
+
 #include "ConfigMainCharacter.h"
 #include "ConfigMap.h"
+#include "ConfigPokemonSprites.h"
+
 #include "GameWindow.h"
-#include "MenuWindow.h"
 #include "Entity.h"
 #include "TileMap.h"
 #include "TextBox.h"
@@ -41,13 +43,15 @@ int main()
 
     int countFrame = 0;
     int currentWindow = 0;
+    sf::Vector2f lastCharacterPosition(INITIAL_POS);
+
     bool gameOn = true;
     while (gameOn) {
         if (currentWindow == 0) { //menu
             
 
             sf::Texture textureBG;
-            if (!textureBG.loadFromFile(BACKGROUND_PATH))
+            if (!textureBG.loadFromFile("data/assets/titleBackground.png"))
                 return -1;
             Entity background = Entity(textureBG);
             
@@ -74,14 +78,14 @@ int main()
             }
         }
         else if (currentWindow == 1) { //Game
-            window._view.setCenter(INITIAL_POS);
+            window._view.setCenter(lastCharacterPosition);
 
             //character
             sf::Texture textureCharacter;
             if (!textureCharacter.loadFromFile(MAIN_CHARACTER_TEXTURE_PATH))
                 return -1;
             MainCharacter mainCharacter = MainCharacter(textureCharacter);
-            mainCharacter.setPosition(300.f, 210.f);
+            mainCharacter.setPosition(lastCharacterPosition.x, lastCharacterPosition.y);
             mainCharacter.setPositionBoxCollider(306.f, 224.f);
 
             //pause
@@ -123,7 +127,7 @@ int main()
             if (!Foreground_objects.load(TILE_MAP_PATH, sf::Vector2u(12, 12), foreground_objects, 70, 40))
                 return -1;
 
-            while (window.isOpen())
+            while (window.isOpen() && currentWindow == 1)
             {
                 if (window.isPause()) {
                     window.handleEventsPause();
@@ -203,6 +207,24 @@ int main()
                 // display window
                 window.display();
             }
+        }
+        else if (currentWindow == 2) {
+            window._view.setCenter(320.f/2,180.f/2);
+
+            sf::Texture textureBG;
+            if (!textureBG.loadFromFile("data/assets/titleBackground.png"))
+                return -1;
+            Entity background = Entity(textureBG);
+
+            sf::Texture texturePokemon1;
+            if (!texturePokemon1.loadFromFile(BULBIZARRE_TEXTURE_PATH))
+                return -1;
+
+            sf::Texture texturePokemon2;
+            if (!texturePokemon2.loadFromFile("data/assets/pokemons/salameche.png"))
+                return -1;
+
+
         }
     }
     return 0;
