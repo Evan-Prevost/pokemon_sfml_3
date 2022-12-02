@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedMainCharacter.cpp" />
+    <ClCompile Include="AnimatedPokemon.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="TextBox.cpp" />
@@ -145,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedMainCharacter.h" />
+    <ClInclude Include="AnimatedPokemon.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="TextBox.h" />

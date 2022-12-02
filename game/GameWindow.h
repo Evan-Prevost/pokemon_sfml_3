@@ -21,9 +21,9 @@ public:
     bool isOpen(void) const;
     bool isPause(void);
 
-    int handleEventsMenu(void);
     int handleEventsGame(void);
-    int handleEventsPause(void);
+    int handleEventsQuit(void);
+    int handleEventsCombat(void);
 
     void clear(void);
     void display(void);

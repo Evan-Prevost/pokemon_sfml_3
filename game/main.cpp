@@ -16,6 +16,7 @@
 #include "TextBox.h"
 #include "Button.h"
 #include "PauseMenu.h"
+#include "AnimatedPokemon.h"
 
 int main()
 {
@@ -25,10 +26,11 @@ int main()
         return -1;
 
     // musiques
-    sf::Music menu, main;
+    sf::Music menu, main, fight;
     
     menu.setVolume(50.f);
     main.setVolume(20.f);
+    fight.setVolume(50.f);
 
     if (!menu.openFromFile("data/sound/music/menuTheme.wav"))
     {
@@ -38,7 +40,12 @@ int main()
     {
         std::cout << "ERROR" << std::endl;
     }
+    if (!fight.openFromFile("data/sound/music/fightTheme.wav"))
+    {
+        std::cout << "ERROR" << std::endl;
+    }
 
+    // Boxes' texture
     sf::Texture textureButton;
     if (!textureButton.loadFromFile("data/assets/boxes/100x30.png"))
         return -1;
@@ -57,7 +64,7 @@ int main()
             
             //menu
 
-            main.stop();
+            
             menu.play();
 
             sf::Texture textureTitle;
@@ -108,12 +115,13 @@ int main()
             while (window.isOpen() && currentWindow == 0) {
                 window.clear();
                 //inputs
-                int result = window.handleEventsMenu();
+                int result = window.handleEventsQuit();
                 if (result == 1) {
                     gameOn = false;
                 }
                 else if (window.isPressed(startButton)) {
                     currentWindow = 1;
+                    menu.stop();
                 }
                 else if (window.isPressed(quitButton)) {
                     window._window.close();
@@ -171,10 +179,10 @@ int main()
                 window.display();
             }
         }
-        else if (currentWindow == 1) { 
+        else if (currentWindow == 1) { //=====MAIN GAME=====
             
             // stop playback and rewind
-            menu.stop();
+            
             main.play();
 
             //Game
@@ -234,8 +242,8 @@ int main()
 
                     main.pause();
 
-                    window.handleEventsPause();
-                    int result = window.handleEventsPause();
+                    window.handleEventsQuit();
+                    int result = window.handleEventsQuit();
                     if(result == 1) {
                         gameOn = false;
                         //pause.setPosition(window._view.getCenter().x - pauseTexture.getSize().x / 2, window._view.getCenter().y - pauseTexture.getSize().y / 2);
@@ -252,12 +260,18 @@ int main()
                         gameOn = false;
                     }
                     window.drawPause(pause);
+                
                 }
                 else {
                     window.clear();
                     int result = window.handleEventsGame();
-                    if (result == 1) {
+                    if (result == 1) { // close program
                         gameOn = false;
+                    }
+                    
+                    else if (result == 3) { // combat
+                        currentWindow = 2;
+                        main.stop();
                     }
                     else {
                         // camera folow character
@@ -305,33 +319,99 @@ int main()
                         //window.drawMap(CollisionsVisible);
                         //gameWindow.drawMap(Battle_zones);
                     }
-                    if (result == 2) {
+                    if (result == 2) { // pause
                         pause.setPosition(window._view.getCenter());
-
                     }
+                    
                 }
                 // display window
                 window.display();
             }
         }
-        else if (currentWindow == 2) {
+        else if (currentWindow == 2) { // Combat
+
+            //medias
+
+            fight.play();
 
             window._view.setCenter(320.f/2,180.f/2);
 
             sf::Texture textureBG;
-            if (!textureBG.loadFromFile("data/assets/titleBackground.png"))
+            if (!textureBG.loadFromFile("data/assets/fightBackground.png"))
                 return -1;
             Entity background = Entity(textureBG);
 
             sf::Texture texturePokemon1;
             if (!texturePokemon1.loadFromFile(BULBIZARRE_TEXTURE_PATH))
                 return -1;
+            int pokemon1Infos[3]BULBIZARRE_SPRITE_INFOS;
+            AnimatedPokemon pokemon1 = AnimatedPokemon(texturePokemon1, pokemon1Infos);
+            pokemon1.setScale(-1, 1);
+            pokemon1.setPosition(100 + pokemon1.getWidth() / 2, 105 - pokemon1.getHeight());
+
 
             sf::Texture texturePokemon2;
-            if (!texturePokemon2.loadFromFile("data/assets/pokemons/salameche.png"))
+            if (!texturePokemon2.loadFromFile(SALAMECHE_TEXTURE_PATH))
                 return -1;
+            int pokemon2Infos[3]SALAMECHE_SPRITE_INFOS;
+            AnimatedPokemon pokemon2 = AnimatedPokemon(texturePokemon2, pokemon2Infos);
+            pokemon2.setPosition(219 - pokemon2.getWidth()/2, 105 - pokemon2.getHeight());
 
+            PauseMenu pause = PauseMenu(texturePauseBG, textureButton, font);
 
+            //combat loop
+
+            int countFrame = 0;
+            while (window.isOpen() && currentWindow == 2)
+            {
+                if (window.isPause()) { //pause
+
+                    fight.pause();
+
+                    window.handleEventsQuit();
+                    int result = window.handleEventsQuit();
+                    if (result == 1) {
+                        gameOn = false;
+                    }
+                    else if (window.isPressed(pause._resume)) {
+                        fight.play();
+                        window._pause = false;
+                    }
+                    else if (window.isPressed(pause._quit)) {
+                        window._window.close();
+                        fight.stop();
+                        gameOn = false;
+                    }
+                    window.drawPause(pause);
+
+                }
+                else {  // main
+                    window.clear();
+                    int result = window.handleEventsCombat();
+                    if (result == 1) {
+                        gameOn = false;
+                    }
+                    else {
+
+                        if (countFrame % 10 == 0)
+                        {
+                            pokemon1.nextAnimation();
+                            pokemon2.nextAnimation();
+                            countFrame = 0;
+                        }
+                        countFrame++;
+
+                        //drawings
+                        window.drawEntity(background);
+                        window.drawEntity(pokemon1);
+                        window.drawEntity(pokemon2);
+                    }
+                    if (result == 2) {
+                        pause.setPosition(window._view.getCenter());
+                    }
+                }
+                window.display();
+            }
         }
     }
     return 0;

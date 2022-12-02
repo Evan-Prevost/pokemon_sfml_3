@@ -24,21 +24,6 @@ bool GameWindow::isPause(void)
     return this->_pause;
 }
 
-int GameWindow::handleEventsMenu(void)
-{
-    sf::Event event;
-    int result = 0;
-    while (this->_window.pollEvent(event))
-    {
-        if (event.type == sf::Event::Closed) {
-            this->_window.close();
-            result = 1;
-            break;
-        }
-
-    }
-    return result;  // 0 = do nothing    1 = close game    2 = start game
-}
 
 int GameWindow::handleEventsGame(void)
 {
@@ -55,11 +40,15 @@ int GameWindow::handleEventsGame(void)
             result = 2;
             break;
         }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+            result = 3;
+            break;
+        }
     }
     return result;
 }
 
-int GameWindow::handleEventsPause(void)
+int GameWindow::handleEventsQuit(void)
 {
     sf::Event event;
     int result = 0;
@@ -68,6 +57,25 @@ int GameWindow::handleEventsPause(void)
         if (event.type == sf::Event::Closed) {
             this->_window.close();
             result = 1;
+        }
+    }
+    return result;
+}
+
+int GameWindow::handleEventsCombat(void)
+{
+    sf::Event event;
+    int result = 0;
+    while (this->_window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed) {
+            result = 1;
+            this->_window.close();
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+            this->_pause = true;
+            result = 2;
+            break;
         }
     }
     return result;
